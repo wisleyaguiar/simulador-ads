@@ -1,0 +1,40 @@
+name: Deploy Automático para CloudPanel
+
+on:
+  push:
+    branches:
+      - main # O deploy roda sempre que houver push na main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Executando Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd htdocs
+            
+            # Puxa as atualizações do Git (descartando edições locais acidentais)
+            git fetch --all
+            git reset --hard origin/main
+            
+            # Atualiza o backend (PHP) sem pacotes de dev
+            composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
+            
+            # Atualiza o frontend (Vue.js / PWA)
+            npm ci --legacy-peer-deps
+            npm run build
+            
+            # Roda as migrações de banco (se houver)
+            php artisan migrate --force
+            
+            # Limpa e otimiza o cache geral da aplicação para máxima performance
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan event:cache
