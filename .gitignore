@@ -15,6 +15,10 @@
 /node_modules
 /public/build
 /public/hot
+/public/sw.js
+/public/workbox-*.js
+/public/manifest.webmanifest
+/public/registerSW.js
 /public/storage
 /storage/*.key
 /storage/pail

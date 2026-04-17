@@ -19,12 +19,19 @@ export default defineConfig({
         }),
         VitePWA({
             registerType: 'autoUpdate',
+            outDir: 'public',
+            scope: '/',
+            base: '/',
             manifest: {
                 name: 'Simulador Ads',
                 short_name: 'Simulador',
+                start_url: '/',
+                scope: '/',
                 theme_color: '#0668E1',
                 background_color: '#faf9ff',
                 display: 'standalone',
+                orientation: 'portrait',
+                lang: 'pt-BR',
                 icons: [
                     {
                         src: '/icons/pwa-192x192.png',
@@ -34,26 +41,45 @@ export default defineConfig({
                     {
                         src: '/icons/pwa-512x512.png',
                         sizes: '512x512',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: 'any maskable'
                     }
                 ]
             },
             workbox: {
+                navigateFallback: null,
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
                         handler: 'CacheFirst',
-                        options: { cacheName: 'google-fonts-cache' }
+                        options: {
+                            cacheName: 'google-fonts-cache',
+                            expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 }
+                        }
                     },
                     {
                         urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
                         handler: 'CacheFirst',
-                        options: { cacheName: 'gstatic-fonts-cache' }
+                        options: {
+                            cacheName: 'gstatic-fonts-cache',
+                            expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 }
+                        }
                     },
                     {
                         urlPattern: /\/api\//i,
                         handler: 'NetworkFirst',
-                        options: { cacheName: 'api-cache' }
+                        options: {
+                            cacheName: 'api-cache',
+                            expiration: { maxEntries: 50, maxAgeSeconds: 60 * 5 }
+                        }
+                    },
+                    {
+                        urlPattern: /\/build\/assets\/.*/i,
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'build-assets-cache',
+                            expiration: { maxEntries: 60, maxAgeSeconds: 60 * 60 * 24 * 30 }
+                        }
                     }
                 ]
             }

@@ -12,10 +12,12 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         
         <meta name="theme-color" content="#0668E1">
+        <link rel="manifest" href="/build/manifest.webmanifest">
         <link rel="apple-touch-icon" href="/icons/pwa-192x192.png">
         <link rel="mask-icon" href="/icons/pwa-512x512.png" color="#0668E1">
         
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="/build/registerSW.js" defer></script>
     </head>
     <body class="antialiased bg-surface text-on-surface font-body">
         <div id="app"></div>
