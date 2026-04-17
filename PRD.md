@@ -55,7 +55,9 @@ Esta regra é mandatória para a precisão do simulador e deve preceder qualquer
      - **Janeiro (Ressaca Comercial):** Deflator de 0.85x (-15% no custo).
      - **Demais meses:** Multiplicador 1.0x (custo normal).
 4. **Projeção em 3 Cenários (Reatividade em Tempo Real):** Apresentar as métricas em cenários: Conservador, Realista e Otimista (variando CTR e Taxa de Conversão para cima e para baixo). Ao arrastar *sliders* ou mudar inputs, o Vue.js recalcula tudo instantaneamente sem sobrecarregar o servidor.
-5. **Alertas Inteligentes:** Gatilhos condicionais no frontend (ex: "Orçamento baixo para a região" ou "Público alcançável pequeno") baseados na população cruzada com a penetração de 70% a 80% das redes sociais.
+5. **Alertas Inteligentes:** 
+  - Gatilhos condicionais no frontend (ex: "Orçamento baixo para a região" ou "Público alcançável pequeno") baseados na população cruzada com a penetração de 70% a 80% das redes sociais.
+  - **Sugestão Dinâmica:** Sempre que um segmento for selecionado, o sistema deve exibir em um card de "Insight do Especialista" o conteúdo do campo `technical_justification`, ajudando o usuário a entender o contexto dos números previstos.
 6. **Módulo de Administração e Importação de Dados:**
 Uma área restrita (Painel Admin) onde o administrador do sistema pode fazer o upload de arquivos .csv ou .xlsx.
 O sistema deve ler a planilha e atualizar automaticamente as tabelas segments (Benchmarks por Segmento) e regions (Inteligência de Região).
@@ -73,6 +75,7 @@ O banco de dados relacional deve conter as seguintes tabelas principais:
   - `avg_ctr` (%).
   - `avg_cpc` (R$).
   - `avg_conversion_rate` (%).
+  - `technical_justification` (Text/LongText): Explicação técnica sobre os benchmarks do setor para alimentar os Alertas Inteligentes.
   - `confidence_score` (decimal de 0.0 a 1.0, indicando a confiabilidade/volume da amostra do dado).
   - `created_at`, `updated_at` (Utilizado para o controle de atualização trimestral).
 - **`regions` (Inteligência de Região)**: 
@@ -156,6 +159,9 @@ Para não sobrecarregar o contexto e economizar tokens, o projeto deve ser execu
   - Frontend Admin: Criar tela de Drag & Drop para planilhas.
   - Adicionar um dropdown/seletor de "Mês da Campanha" no Painel de Input para que o usuário possa ativar os cenários de Sazonalidade (Black Friday, Natal, etc.).
   - Frontend: Criar tela restrita para o admin com áreas de "Drag and Drop" para as planilhas. Incluir um painel de "Saúde dos Dados", exibindo alertas baseados no `updated_at` (ex: avisar se a tabela Segments não for atualizada há mais de 90 dias) e exibindo a média do `confidence_score`.
+  - **FASE 5.5: Módulo Administrativo (Upload de Dados)**
+    - **Backend:** Atualizar a lógica de leitura de CSV para mapear a nova coluna `technical_justification`. 
+    - **Frontend:** Garantir que o "Template de Planilha" para download já contenha esta coluna como obrigatória.
 
 - **FASE 6: Segurança, Auditoria e Deploy**
   - **Skills Obrigatórias:** `@security-review`, `@web-performance`
