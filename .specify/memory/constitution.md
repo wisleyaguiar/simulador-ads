@@ -1,50 +1,155 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+  Sync Impact Report
+  ==================
+  Version change: N/A (template) → 1.0.0
+  Modified principles: N/A (initial creation)
+  Added sections:
+    - I. Execução Estrita (Docker)
+    - II. Regra de Ouro Tributária
+    - III. Fidelidade de UI (Zero Invenção)
+    - IV. Padrão PWA
+    - Restrições de Ambiente e Ferramentas
+    - Fluxo de Desenvolvimento
+  Removed sections: N/A
+  Templates requiring updates:
+    - plan-template.md: ✅ Alinhado (Constitution Check já previsto)
+    - spec-template.md: ✅ Alinhado (sem conflitos)
+    - tasks-template.md: ✅ Alinhado (sem conflitos)
+  Follow-up TODOs: Nenhum
+-->
+
+# Simulador Ads Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Execução Estrita (Docker)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+A infraestrutura local deste projeto roda **EXCLUSIVAMENTE** via Docker
+utilizando o **Laravel Sail**. O ambiente host (máquina local) NÃO possui
+as dependências do Node, PHP ou Composer configuradas globalmente.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Regras Absolutas:**
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- A IA **NUNCA** DEVE rodar `npm`, `npx`, `php` ou `composer` nativos
+  diretamente no host.
+- **SEMPRE** prefixe os comandos com `./vendor/bin/sail`.
+- Comandos corretos (obrigatórios):
+  - `./vendor/bin/sail npm install`
+  - `./vendor/bin/sail npm run dev`
+  - `./vendor/bin/sail npx tailwindcss -i ...`
+  - `./vendor/bin/sail artisan migrate`
+  - `./vendor/bin/sail composer require pacote/nome`
+- Comandos **PROIBIDOS**: `npm run dev`, `npx tailwindcss`, `php artisan`,
+  `composer install` (sem prefixo Sail).
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+**Racional:** O host não possui runtime PHP nem Node.js instalados.
+Executar comandos nativos resultará em erro fatal e perda de contexto.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### II. Regra de Ouro Tributária
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Nos cálculos do simulador, o `Orçamento_Bruto` inserido pelo usuário DEVE
+sofrer uma **dedução opcional de 12,15%** (PIS/Cofins/ISS).
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Regras Absolutas:**
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- A UI DEVE conter um Toggle/Switch "Deduzir Impostos (12,15%)".
+- Se a dedução for ativada:
+  `Orçamento_Líquido = Orçamento_Bruto × (1 - 0.1215)`
+- Quando ativa, a variável `Orçamento_Líquido` DEVE **OBRIGATORIAMENTE**
+  ser usada como base para **todos** os cálculos matemáticos subsequentes
+  (Impressões, Cliques, Leads, Conversões, CPA).
+- O `Orçamento_Bruto` **NUNCA** DEVE ser usado como base de cálculo
+  quando a dedução estiver ativada.
+- A UI DEVE exibir claramente o valor efetivamente investido em mídia
+  após a dedução tributária.
+
+**Racional:** Em 2026, a retenção de PIS/Cofins e ISS sobre serviços
+de mídia digital é mandatória para contas pré-pagas e pós-pagas. Usar
+o valor bruto como base geraria projeções infladas e irreais.
+
+### III. Fidelidade de UI (Zero Invenção)
+
+O Tailwind CSS **NUNCA** DEVE ser configurado ou estilizado "do zero".
+A IA DEVE obrigatoriamente seguir as fontes de verdade visuais abaixo.
+
+**Regras Absolutas:**
+
+- A IA DEVE ler o arquivo `DESIGN.md` na raiz do projeto para extrair
+  todas as cores, tokens tipográficos, regras de sombra, raios de borda
+  e diretrizes de layout **antes** de criar qualquer componente.
+- A IA DEVE extrair o HTML base dos arquivos na pasta
+  `_references/stitch/` ao criar componentes Vue.
+- Classes Tailwind inventadas ou cores ad-hoc são **PROIBIDAS**.
+- Qualquer componente Vue criado DEVE ser rastreável até uma referência
+  no `DESIGN.md` ou nos HTMLs de `_references/stitch/`.
+- Em caso de conflito entre `DESIGN.md` e `_references/stitch/`, o
+  `DESIGN.md` prevalece como fonte de verdade semântica.
+
+**Racional:** Garantir coerência visual absoluta entre o design aprovado
+e a implementação final, eliminando divergências estéticas e retrabalho.
+
+### IV. Padrão PWA
+
+O frontend Vue.js DEVE ser construído desde o **Dia 1** como um
+**Progressive Web App (PWA)** utilizando Vite.
+
+**Regras Absolutas:**
+
+- O projeto DEVE incluir um `manifest.json` gerado automaticamente com
+  nome, descrição, cor de tema (`#0668E1`) e ícones.
+- Um Service Worker DEVE ser configurado para realizar cache offline
+  **agressivo** para a lógica matemática (motor de cálculo).
+- A aplicação DEVE ser instalável em desktops (Chrome/Edge) e
+  dispositivos móveis (iOS/Android).
+- Assets estáticos DEVEM ser cacheados para carregamento rápido em
+  conexões lentas.
+- A interface DEVE ser exibível mesmo em modo offline (graceful
+  degradation para funcionalidades que dependem de API).
+
+**Racional:** O simulador é uma ferramenta de campo para gestores de
+tráfego. A capacidade offline garante uso contínuo em reuniões, eventos
+e locais com conectividade limitada.
+
+## Restrições de Ambiente e Ferramentas
+
+- **Stack Backend:** PHP 8.2+ com Laravel 11+, MySQL 8.0.
+- **Stack Frontend:** Vue.js 3 (Composition API), Tailwind CSS,
+  Vite como bundler.
+- **Infraestrutura Local:** Docker via Laravel Sail exclusivamente.
+- **Versionamento:** Git + GitHub.
+- **Produção:** VPS com CloudPanel.
+- **Lógica Matemática:** Roda 100% no navegador (Vue.js/Pinia).
+  O backend serve apenas dados base e persiste histórico.
+- **Dados de Referência:** Benchmarks por segmento e dados regionais
+  são carregados do backend uma única vez (GET /api/parameters) e
+  armazenados no estado Pinia.
+
+## Fluxo de Desenvolvimento
+
+- **Fontes de Verdade Visual:** `DESIGN.md` (tokens) +
+  `_references/stitch/` (HTML base).
+- **Ordem de Criação de UI:** (1) Ler `DESIGN.md`, (2) Ler HTML de
+  referência em `_references/stitch/`, (3) Converter para componente
+  Vue limpo, (4) Validar fidelidade visual.
+- **Commits:** Cada tarefa ou grupo lógico DEVE gerar um commit
+  atômico com mensagem descritiva.
+- **Testes Manuais:** Após cada fase, validar visualmente a UI e
+  executar cenários de cálculo com valores conhecidos.
+- **Constitution Check:** Antes de iniciar qualquer fase de
+  implementação, verificar conformidade com os 4 princípios acima.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Esta Constituição **SOBREPÕE** qualquer instrução conflitante
+  recebida pela IA durante o desenvolvimento.
+- Emendas requerem: (1) documentação da mudança proposta,
+  (2) aprovação explícita do Arquiteto de Software Chefe,
+  (3) atualização deste documento com incremento de versão.
+- Toda revisão de código ou PR DEVE verificar conformidade com
+  os 4 princípios fundamentais.
+- Violações de princípios DEVEM ser justificadas na tabela de
+  Complexity Tracking do plano de implementação.
+- Versionamento segue SemVer: MAJOR (remoção/redefinição de
+  princípios), MINOR (adição de princípios), PATCH (ajustes textuais).
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-04-16 | **Last Amended**: 2026-04-16
