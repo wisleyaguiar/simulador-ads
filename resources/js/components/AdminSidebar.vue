@@ -3,7 +3,7 @@
     <div class="flex flex-col h-full py-6 px-4">
       <div class="mb-8 px-2 flex items-center gap-3">
         <div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white">
-          <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+          <img src="../../images/logo-aplicativo.png" alt="Logo Simulador Ads">
         </div>
         <div>
           <h1 class="text-lg font-bold text-slate-900 dark:text-white font-headline leading-tight">Simulador Ads</h1>

@@ -1,9 +1,9 @@
 <template>
   <main class="flex flex-col md:flex-row w-full min-h-screen overflow-hidden">
     <!-- Left Side: Branded Graphic -->
-    <section class="hidden md:flex md:w-1/2 lg:w-[55%] relative overflow-hidden bg-primary-container items-center justify-center p-12">
+    <section class="hidden md:flex md:w-1/2 lg:w-[55%] relative overflow-hidden bg-primary-container justify-center p-12 md:p-16 lg:p-24">
       <div class="absolute inset-0 opacity-40">
-        <img alt="Marketing ROI Growth Visualization" class="w-full h-full object-cover mix-blend-overlay" data-alt="Modern data visualization dashboard with 3D floating bar charts and growth curves in shades of corporate blue and white, editorial style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU_Z5ysIcxj5KwazzjGtLx0Z13Oxzm4lDF60RraFaTZDaiBHgXx0ktEFfejoDhXxMWx0YwXGtKB11wqHCW1kp5HpmAIfLCLKxterSNmAhd4NigC-mku_AiQloUwWVp4kZKd3svH0ftSXQKqPX0L_CBvLUcweQTxt0qV3KZGHPw0UzOLG7z7F0zlL7Slk2oQ1VUY-wSCX_I6uPVEsnp9dyz-SasoptTeOzwYNzSuHjijNxPpJm_jaC3uhTtqNZvoE85-gsNnPbr5nFH"/>
+        <img alt="Marketing ROI Growth Visualization" class="w-full h-full object-cover mix-blend-overlay" data-alt="Modern data visualization dashboard with 3D floating bar charts and growth curves in shades of corporate blue and white, editorial style" src="../../images/fundo-esquerda-login.png"/>
       </div>
       <!-- Asymmetrical Decorative Elements -->
       <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary rounded-full blur-[100px] opacity-50"></div>
@@ -50,7 +50,7 @@
         <header class="mb-12">
           <div class="flex items-center gap-2 mb-8">
             <div class="w-10 h-10 gradient-button !px-0 rounded-xl flex items-center justify-center">
-              <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">analytics</span>
+              <img src="../../images/logo-aplicativo.png" alt="Logo Simulador Ads">
             </div>
             <h1 class="text-2xl font-black tracking-tight text-primary font-headline">Simulador Ads</h1>
           </div>

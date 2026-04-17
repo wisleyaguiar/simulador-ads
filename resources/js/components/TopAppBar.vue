@@ -1,6 +1,9 @@
 <template>
   <nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl flex justify-between items-center fixed w-full px-8 h-20 top-0 z-50 shadow-xl shadow-slate-200/50 dark:shadow-none">
-    <div class="flex items-center gap-12">
+    <div class="flex items-center gap-6">
+      <div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-white">
+        <img src="../../images/logo-aplicativo.png" alt="Logo Simulador Ads">
+      </div>
       <router-link to="/dashboard" class="text-2xl font-black tracking-tight text-blue-700 dark:text-blue-500 font-headline">Simulador Ads</router-link>
       <div class="hidden md:flex items-center gap-8">
         <router-link to="/dashboard" class="font-bold border-b-2 pb-1 transition-all duration-300" :class="$route.name === 'dashboard' ? 'text-blue-600 dark:text-blue-400 border-blue-600' : 'text-slate-500 dark:text-slate-400 border-transparent hover:text-blue-500'">Dashboard</router-link>
