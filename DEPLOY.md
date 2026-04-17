@@ -23,7 +23,7 @@ O CloudPanel cria um usuário SSH isolado para cada site. Vamos usá-lo para clo
 
 1. No CloudPanel, vá em **SSH/FTP** e crie uma senha para o usuário do site (geralmente o nome de usuário é parecido com o domínio, ex: `simuladorads`).
 2. Acesse sua VPS via Terminal (SSH) usando este usuário: 
-   `ssh simuladorads@147.93.66.129`
+   `ssh agenciatobe-simuladorads@147.93.66.129`
 3. Navegue até a pasta raiz:
    `cd htdocs`
 4. Apague a pasta padrão que o CloudPanel cria e clone o seu repositório:
@@ -110,7 +110,7 @@ jobs:
             composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
             
             # Atualiza o frontend (Vue.js / PWA)
-            npm ci
+            npm ci --legacy-peer-deps
             npm run build
             
             # Roda as migrações de banco (se houver)
@@ -132,10 +132,10 @@ Se precisar criar a conta Master-Admin após o banco de dados estar limpo na pro
 
 ```php
 \App\Models\User::firstOrCreate(
-    ['email' => 'admin@agenciatobe.com.br'],
+    ['email' => 'wisley@tobe.ppg.br'],
     [
-        'name' => 'Root Admin',
-        'password' => \Illuminate\Support\Facades\Hash::make('SenhaForte123!'),
+        'name' => 'Wisley Aguiar',
+        'password' => \Illuminate\Support\Facades\Hash::make('Tobe!@#13net'),
         'role' => 'admin'
     ]
 );
