@@ -1,7 +1,8 @@
-# Specification Quality Checklist: Simulador Ads MVP
+# Specification Quality Checklist: Simulador Ads MVP (v2)
 
-**Purpose**: Validar completude e qualidade da especificação antes de prosseguir ao planning
+**Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2026-04-16
+**Updated**: 2026-04-16 (v2 — Sazonalidade, Confidence Score, Saúde dos Dados)
 **Feature**: [spec.md](../spec.md)
 
 ## Content Quality
@@ -29,8 +30,19 @@
 - [x] Feature meets measurable outcomes defined in Success Criteria
 - [x] No implementation details leak into specification
 
+## v2 Coverage Check
+
+- [x] Sazonalidade do Leilão documentada como User Story (US3) e Requisito (FR-006, FR-007)
+- [x] Confidence Score incluído nas entidades, requisitos (FR-008, FR-009, FR-016) e edge cases
+- [x] Saúde dos Dados documentada em User Story (US6) e Requisito (FR-015)
+- [x] Pipeline de cálculo com ordem estrita definido (FR-007)
+- [x] Alertas de sazonalidade intensa documentados (US4)
+- [x] Campaign Month no histórico (US7)
+- [x] Edge case para confidence_score fora de range documentado
+- [x] Success Criteria incluem sazonalidade (SC-004) e saúde dos dados (SC-009)
+
 ## Notes
 
 - Todos os itens passaram na validação.
-- A spec cobre 7 User Stories (P1-P3), 12 Functional Requirements, 4 Key Entities, 7 Success Criteria e 4 Edge Cases.
-- Pronta para `/speckit.plan` e `/speckit.tasks` (já gerados).
+- v2 cobre: 8 User Stories (P1-P3), 16 Functional Requirements, 4 Key Entities, 9 Success Criteria, 7 Edge Cases.
+- Pronta para execução (`/speckit-implement`).

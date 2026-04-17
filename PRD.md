@@ -28,6 +28,14 @@ Portanto, aplique a seguinte regra absoluta para a execução de qualquer comand
 ## 3. Funcionalidades Principais do MVP
 A lógica de negócios baseia-se nas seguintes funcionalidades centrais:
 1. **Calculadora de Custo Real (Ajuste Tributário 2026 via Toggle):** A interface terá um interruptor (Toggle) de "Deduzir Impostos (12,15%)". Quando ativado, e se a conta for configurada como pré-paga ou pós-paga, o sistema deduz 12,15% (PIS/Cofins e ISS) do orçamento bruto, fazendo os cálculos de mídia apenas sobre o valor líquido.
+### 3.1. Detalhamento da Regra 3: Ajuste Tributário 2026 (OBRIGATÓRIO)
+Esta regra é mandatória para a precisão do simulador e deve preceder qualquer outro cálculo de mídia.
+- **Parâmetro de Imposto:** Retenção fixa de 12,15% (PIS/Cofins e ISS).
+- **Lógica de Aplicação:** 1. O sistema recebe o `Orçamento_Bruto` do usuário.
+    2. Deve haver um campo (Toggle/Switch) para ativar "Deduzir Impostos Retidos".
+    3. Se ativo: `Orçamento_Líquido = Orçamento_Bruto * (1 - 0.1215)`.
+    4. **Regra de Ouro:** Todos os cálculos subsequentes (Impressões, Cliques, Leads, Conversões) devem utilizar obrigatoriamente o `Orçamento_Líquido` como base, e não o valor bruto inserido.
+- **Exibição na UI:** O resumo de resultados deve mostrar claramente o valor que será efetivamente investido em mídia após a dedução tributária.
 2. **Lógica de Benchmarks e Maturidade da Campanha:** 
    - A matemática roda 100% no navegador (Vue.js). O cálculo baseia-se em:
      - *Impressões* = (Orçamento / CPM) * 1000.
@@ -39,21 +47,20 @@ A lógica de negócios baseia-se nas seguintes funcionalidades centrais:
      - *Intermediário:* Mantém a média (0% de alteração).
      - *Avançado:* Aumenta o CTR e a Taxa de Conversão base em 10%.
    - **Fator Objetivo:** O objetivo da campanha altera o foco das métricas (ex: "Alcance" foca em CPM otimizado, "Tráfego" foca em CPC/CTR, "Leads/Conversões" focam na Taxa de Conversão).
-3. **Projeção em 3 Cenários (Reatividade em Tempo Real):** Apresentar as métricas em cenários: Conservador, Realista e Otimista (variando CTR e Taxa de Conversão para cima e para baixo). Ao arrastar *sliders* ou mudar inputs, o Vue.js recalcula tudo instantaneamente sem sobrecarregar o servidor.
-### 3.1. Detalhamento da Regra 3: Ajuste Tributário 2026 (OBRIGATÓRIO)
-Esta regra é mandatória para a precisão do simulador e deve preceder qualquer outro cálculo de mídia.
-- **Parâmetro de Imposto:** Retenção fixa de 12,15% (PIS/Cofins e ISS).
-- **Lógica de Aplicação:** 1. O sistema recebe o `Orçamento_Bruto` do usuário.
-    2. Deve haver um campo (Toggle/Switch) para ativar "Deduzir Impostos Retidos".
-    3. Se ativo: `Orçamento_Líquido = Orçamento_Bruto * (1 - 0.1215)`.
-    4. **Regra de Ouro:** Todos os cálculos subsequentes (Impressões, Cliques, Leads, Conversões) devem utilizar obrigatoriamente o `Orçamento_Líquido` como base, e não o valor bruto inserido.
-- **Exibição na UI:** O resumo de resultados deve mostrar claramente o valor que será efetivamente investido em mídia após a dedução tributária.
-4. **Alertas Inteligentes:** Gatilhos condicionais no frontend (ex: "Orçamento baixo para a região" ou "Público alcançável pequeno") baseados na população cruzada com a penetração de 70% a 80% das redes sociais.
-5. **Módulo de Administração e Importação de Dados:**
+3. **Lógica de Sazonalidade do Leilão (Vue.js/Pinia):**
+   - Para prever oscilações reais do Meta Ads, a interface deve conter um input/seletor de **"Mês Previsto da Campanha"**.
+   - O motor matemático no frontend deve aplicar um multiplicador sobre o custo base (CPM e CPC) antes de calcular os resultados finais:
+     - **Novembro (Black Friday/Cyber Monday):** Multiplicador de 1.5x (+50% no custo do leilão).
+     - **Dezembro (Natal):** Multiplicador de 1.3x (+30% no custo).
+     - **Janeiro (Ressaca Comercial):** Deflator de 0.85x (-15% no custo).
+     - **Demais meses:** Multiplicador 1.0x (custo normal).
+4. **Projeção em 3 Cenários (Reatividade em Tempo Real):** Apresentar as métricas em cenários: Conservador, Realista e Otimista (variando CTR e Taxa de Conversão para cima e para baixo). Ao arrastar *sliders* ou mudar inputs, o Vue.js recalcula tudo instantaneamente sem sobrecarregar o servidor.
+5. **Alertas Inteligentes:** Gatilhos condicionais no frontend (ex: "Orçamento baixo para a região" ou "Público alcançável pequeno") baseados na população cruzada com a penetração de 70% a 80% das redes sociais.
+6. **Módulo de Administração e Importação de Dados:**
 Uma área restrita (Painel Admin) onde o administrador do sistema pode fazer o upload de arquivos .csv ou .xlsx.
 O sistema deve ler a planilha e atualizar automaticamente as tabelas segments (Benchmarks por Segmento) e regions (Inteligência de Região).
 A interface deve fornecer um "Template de Planilha" para download, garantindo que o administrador preencha as colunas com os nomes exatos que o banco de dados espera.
-6. **Suporte PWA (Progressive Web App):** - A aplicação deve ser instalável em desktops (Chrome/Edge) e dispositivos móveis (iOS/Android).
+7. **Suporte PWA (Progressive Web App):** - A aplicação deve ser instalável em desktops (Chrome/Edge) e dispositivos móveis (iOS/Android).
    - O frontend deve incluir a geração automática de um `manifest.json` com nome, descrição, cor de tema (`#0668E1`) e ícones.
    - Deve possuir um Service Worker básico configurado para realizar o cache de assets estáticos, garantindo carregamento rápido em conexões lentas e exibição da interface mesmo offline.
 
@@ -66,11 +73,15 @@ O banco de dados relacional deve conter as seguintes tabelas principais:
   - `avg_ctr` (%).
   - `avg_cpc` (R$).
   - `avg_conversion_rate` (%).
+  - `confidence_score` (decimal de 0.0 a 1.0, indicando a confiabilidade/volume da amostra do dado).
+  - `created_at`, `updated_at` (Utilizado para o controle de atualização trimestral).
 - **`regions` (Inteligência de Região)**: 
   - `id`, `name` (Estado/Município).
   - `total_population`.
   - `reachable_audience` (70-80% da população).
   - `avg_cpm` (R$).
+  - `confidence_score` (decimal de 0.0 a 1.0).
+  - `created_at`, `updated_at` (Utilizado para o controle de atualização semestral/anual).
 - **`simulations` (Histórico)**: 
   - `id`, `user_id`, `budget`, `payment_type`, `campaign_days`, `region_id`, `segment_id`, `goal`, **`maturity_level`**.
   - `results_json` (armazenar os cálculos finais para histórico).
@@ -135,6 +146,7 @@ Para não sobrecarregar o contexto e economizar tokens, o projeto deve ser execu
   - Instalar Vue.js e Tailwind CSS. Configurar o projeto como PWA utilizando Vite (manifest, ícones, service worker).
   - Ingerir as regras visuais do arquivo `DESIGN.md`.
   - Criar o Store no Vue.js (Pinia) para centralizar a lógica matemática e os multiplicadores de maturidade (-15%, 0%, +10%).
+  - Integrar ao Store (Pinia) o "Multiplicador de Sazonalidade" para inflacionar ou deflacionar o CPM/CPC com base no mês da campanha (Novembro +50%, Dezembro +30%, Janeiro -15%).
 
 - **FASE 5 e 5.5: UI/UX Reativa e Módulo Admin**
   - **Skills Obrigatórias:** `@vue3-composition-api`, `@frontend-accessibility`
@@ -142,6 +154,8 @@ Para não sobrecarregar o contexto e economizar tokens, o projeto deve ser execu
   - Integrar os sliders e botões com a loja Pinia para reatividade em tempo real.
   - Backend Admin: Criar middleware IsAdmin e endpoints de upload CSV.
   - Frontend Admin: Criar tela de Drag & Drop para planilhas.
+  - Adicionar um dropdown/seletor de "Mês da Campanha" no Painel de Input para que o usuário possa ativar os cenários de Sazonalidade (Black Friday, Natal, etc.).
+  - Frontend: Criar tela restrita para o admin com áreas de "Drag and Drop" para as planilhas. Incluir um painel de "Saúde dos Dados", exibindo alertas baseados no `updated_at` (ex: avisar se a tabela Segments não for atualizada há mais de 90 dias) e exibindo a média do `confidence_score`.
 
 - **FASE 6: Segurança, Auditoria e Deploy**
   - **Skills Obrigatórias:** `@security-review`, `@web-performance`
