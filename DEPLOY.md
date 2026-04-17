@@ -142,10 +142,10 @@ Se precisar criar a conta Master-Admin após o banco de dados estar limpo na pro
 ```
 
 ## 3. Checklist de Auditoria Pós-Deploy
-- [ ] O arquivo `.env` na VPS possui `APP_ENV=production` e `APP_DEBUG=false`.
-- [ ] A URL acessada possui o cadeado verde (Certificado Let's Encrypt ativo no CloudPanel), necessário para o PWA.
-- [ ] O Vhost Document Root no CloudPanel termina em `/htdocs/public`.
-- [ ] O comando `php artisan storage:link` foi rodado ao menos uma vez para garantir exibição de arquivos.
+- [x] O arquivo `.env` na VPS possui `APP_ENV=production` e `APP_DEBUG=false`.
+- [x] A URL acessada possui o cadeado verde (Certificado Let's Encrypt ativo no CloudPanel), necessário para o PWA.
+- [x] O Vhost Document Root no CloudPanel termina em `/htdocs/public`.
+- [x] O comando `php artisan storage:link` foi rodado ao menos uma vez para garantir exibição de arquivos.
 ```
 
 ### O que você ganha com este novo fluxo?
