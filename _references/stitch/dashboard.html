@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#424754",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#004397",
+                        "surface-container": "#ecedf8",
+                        "on-primary-container": "#edf0ff",
+                        "outline-variant": "#c2c6d6",
+                        "inverse-primary": "#aec6ff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#0668e1",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary-fixed-dim": "#afc6fd",
+                        "inverse-surface": "#2e3038",
+                        "on-surface": "#191b23",
+                        "secondary": "#475e8e",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#0059c5",
+                        "surface-bright": "#faf9ff",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-tertiary-container": "#ffede6",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#aec6ff",
+                        "primary": "#0051b3",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8d9e4",
+                        "surface": "#faf9ff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#001a43",
+                        "tertiary-fixed": "#ffdbcd",
+                        "outline": "#727785",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-container": "#3b5281",
+                        "tertiary-container": "#bc4800",
+                        "on-secondary-fixed-variant": "#2f4675",
+                        "surface-container-highest": "#e1e2ec",
+                        "secondary-container": "#afc6fd",
+                        "tertiary": "#943700",
+                        "on-background": "#191b23",
+                        "inverse-on-surface": "#eff0fb",
+                        "surface-variant": "#e1e2ec",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "background": "#faf9ff",
+                        "surface-container-high": "#e6e7f2",
+                        "surface-container-low": "#f2f3fe",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#001a43",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-metric {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(194, 198, 214, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar Execution -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl flex justify-between items-center w-full px-8 h-20 max-w-full docked full-width top-0 z-50 shadow-xl shadow-slate-200/50 dark:shadow-none">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-black tracking-tight text-blue-700 dark:text-blue-500">Simulador Ads</span>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-600 dark:text-blue-400 font-bold border-b-2 border-blue-600 pb-1" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-blue-500 transition-all duration-300" href="#">Scenarios</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-blue-500 transition-all duration-300" href="#">History</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-blue-500 transition-all duration-300" href="#">Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-all">notifications</button>
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-all">settings</button>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-3 rounded-xl font-bold hover:scale-95 transition-all duration-150 ease-in-out">
+                Nova Simulação
+            </button>
+<img alt="User profile avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary/10" data-alt="professional headshot of a creative director in a minimalist studio setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqyxcPErSZgzC7a7LFCutHPcNAX_VtmCFU-3P_TDRK2dJQKoK-2hsoK1-_lmIuhtrFUGZkeZWTMtOocplCZSNNUxxYPI5gJVk-oqD5N1PYunMicJ_nWrxDvCZOPzdiYAuVfXKxP_Fr3E8Wfrs0VuReE98LyV0chkzEw7pEmcxhH6rdiUP8fkUQ2d4riLHt_qfuEFyhrmOk_yu8EFVCz8BoGJ2anM4zwf4Yvo1Nu8LWqe2RPbJUVSrQWQlE6MfPx77F73vuQr5xfJXy"/>
+</div>
+</nav>
+<main class="max-w-[1600px] mx-auto px-8 pt-32 pb-12">
+<div class="grid grid-cols-1 lg:grid-cols-[35%_65%] gap-8">
+<!-- Left Column: Input Panel -->
+<aside class="space-y-8">
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">tune</span>
+<h2 class="text-2xl font-bold tracking-tight">Parâmetros da Campanha</h2>
+</div>
+<form class="space-y-6">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Orçamento Total (R$)</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary transition-all text-on-surface font-medium" placeholder="Ex: 5000,00" type="number"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Tipo de Conta 2026</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary transition-all text-on-surface font-medium appearance-none">
+<option>Pré-paga PIX</option>
+<option>Pós-paga Cartão</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Período (Dias)</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary font-medium" type="number" value="30"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Região</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary font-medium">
+<option>Brasil - Nacional</option>
+<option>Sudeste</option>
+<option>Sul</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-2">Segmento de Mercado</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg p-4 focus:ring-2 focus:ring-primary font-medium">
+<option>E-commerce Moda</option>
+<option>SaaS B2B</option>
+<option>Educação Online</option>
+<option>Imobiliário</option>
+</select>
+</div>
+<div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-4">Objetivo da Campanha</label>
+<div class="grid grid-cols-1 gap-3">
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input checked="" class="text-primary focus:ring-primary" name="objective" type="radio"/>
+<span class="font-medium">Tráfego</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input class="text-primary focus:ring-primary" name="objective" type="radio"/>
+<span class="font-medium">Leads</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input class="text-primary focus:ring-primary" name="objective" type="radio"/>
+<span class="font-medium">Conversões</span>
+</label>
+</div>
+</div><div>
+<label class="block text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-4">Nível de Maturidade da campanha</label>
+<div class="grid grid-cols-1 gap-3">
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input checked="" class="text-primary focus:ring-primary" name="maturity" type="radio" value="iniciante"/>
+<span class="font-medium">Iniciante</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input class="text-primary focus:ring-primary" name="maturity" type="radio" value="intermediario"/>
+<span class="font-medium">Intermediário</span>
+</label>
+<label class="flex items-center gap-3 p-4 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container transition-all border border-transparent has-[:checked]:border-primary/50 has-[:checked]:bg-primary-fixed/30">
+<input class="text-primary focus:ring-primary" name="maturity" type="radio" value="avancado"/>
+<span class="font-medium">Avançado</span>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary py-5 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:translate-y-[-2px] transition-all" type="button">
+                            Simular Resultados
+                        </button>
+</form>
+</div>
+</aside>
+<!-- Right Column: Results Panel -->
+<section class="space-y-8">
+<!-- Highlight Card -->
+<div class="flex justify-end items-center gap-3 mb-4">
+<button class="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:bg-surface-container rounded-lg transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm">description</span>
+        Excel
+    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:bg-surface-container rounded-lg transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+        PDF
+    </button>
+<button class="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:bg-surface-container rounded-lg transition-all border border-outline-variant/30">
+<span class="material-symbols-outlined text-sm">image</span>
+        PNG
+    </button>
+</div><div class="relative overflow-hidden bg-gradient-to-br from-primary to-primary-container rounded-xl p-10 text-on-primary shadow-2xl">
+<div class="relative z-10 grid md:grid-cols-3 gap-8 items-center">
+<div>
+<p class="text-primary-fixed/80 font-medium text-sm mb-1 uppercase tracking-widest">Orçamento Bruto</p>
+<h3 class="text-3xl font-extrabold tracking-tighter">R$ 5.000,00</h3>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm">info</span>
+<p class="text-white/70 font-medium text-xs uppercase tracking-widest">Dedução Tributária (12.15%)</p>
+</div>
+<h3 class="text-2xl font-bold tracking-tight">- R$ 607,50</h3>
+</div>
+<div class="text-right">
+<p class="text-primary-fixed/80 font-medium text-sm mb-1 uppercase tracking-widest">Orçamento Real (Líquido)</p>
+<h3 class="text-5xl font-black tracking-tighter text-white">R$ 4.392,50</h3>
+</div>
+</div>
+<!-- Decorative background element -->
+<div class="absolute top-[-50%] right-[-10%] w-[400px] h-[400px] bg-white/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Scenario Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Conservador -->
+<div class="bg-red-50/50 rounded-xl p-6 border border-red-100 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-red-100 text-red-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded">Conservador</span>
+<span class="material-symbols-outlined text-red-300">trending_flat</span>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-xs text-red-900/50 font-bold uppercase tracking-wider">Impressões</p>
+<p class="text-2xl font-black text-red-900 tracking-tight">125k</p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<p class="text-[10px] text-red-900/50 font-bold uppercase">Cliques</p>
+<p class="text-lg font-bold text-red-900">840</p>
+</div>
+<div>
+<p class="text-[10px] text-red-900/50 font-bold uppercase">Leads</p>
+<p class="text-lg font-bold text-red-900">12</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-red-200/50">
+<p class="text-[10px] text-red-900/50 font-bold uppercase mb-1">CPA Estimado</p>
+<p class="text-xl font-black text-red-700">R$ 366,00</p>
+</div>
+</div>
+<!-- Realista -->
+<div class="bg-yellow-50/50 rounded-xl p-6 border border-yellow-100 flex flex-col justify-between ring-2 ring-yellow-400/20">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-yellow-100 text-yellow-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded">Realista</span>
+<span class="material-symbols-outlined text-yellow-500" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-xs text-yellow-900/50 font-bold uppercase tracking-wider">Impressões</p>
+<p class="text-2xl font-black text-yellow-900 tracking-tight">184k</p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<p class="text-[10px] text-yellow-900/50 font-bold uppercase">Cliques</p>
+<p class="text-lg font-bold text-yellow-900">1.2k</p>
+</div>
+<div>
+<p class="text-[10px] text-yellow-900/50 font-bold uppercase">Leads</p>
+<p class="text-lg font-bold text-yellow-900">28</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-yellow-200/50">
+<p class="text-[10px] text-yellow-900/50 font-bold uppercase mb-1">CPA Estimado</p>
+<p class="text-xl font-black text-yellow-700">R$ 156,87</p>
+</div>
+</div>
+<!-- Otimista -->
+<div class="bg-emerald-50/50 rounded-xl p-6 border border-emerald-100 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded">Otimista</span>
+<span class="material-symbols-outlined text-emerald-400">trending_up</span>
+</div>
+<div class="space-y-4">
+<div>
+<p class="text-xs text-emerald-900/50 font-bold uppercase tracking-wider">Impressões</p>
+<p class="text-2xl font-black text-emerald-900 tracking-tight">250k</p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<p class="text-[10px] text-emerald-900/50 font-bold uppercase">Cliques</p>
+<p class="text-lg font-bold text-emerald-900">2.4k</p>
+</div>
+<div>
+<p class="text-[10px] text-emerald-900/50 font-bold uppercase">Leads</p>
+<p class="text-lg font-bold text-emerald-900">54</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-emerald-200/50">
+<p class="text-[10px] text-emerald-900/50 font-bold uppercase mb-1">CPA Estimado</p>
+<p class="text-xl font-black text-emerald-700">R$ 81,34</p>
+</div>
+</div>
+</div>
+<!-- Alertas e Sugestões -->
+<div class="bg-surface-container-low rounded-xl p-8">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                        Alertas Inteligentes e Sugestões
+                    </h3>
+<div class="grid md:grid-cols-2 gap-4">
+<!-- Alerta -->
+<div class="flex gap-4 p-5 bg-white rounded-xl shadow-sm">
+<div class="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-yellow-600" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Orçamento Crítico</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Seu orçamento líquido está abaixo do mínimo recomendado para competitividade no segmento de E-commerce. Considere aumentar 15%.</p>
+</div>
+</div>
+<!-- Dica -->
+<div class="flex gap-4 p-5 bg-white rounded-xl shadow-sm">
+<div class="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-600" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface mb-1">Otimização de Período</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">Extender a campanha para 45 dias pode reduzir seu CPA em até 12% devido ao período de aprendizado do algoritmo.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Extra: Visual Asset (The Metric Glass inspired) -->
+<div class="relative h-64 rounded-xl overflow-hidden shadow-lg">
+<img alt="Analytics visualization" class="w-full h-full object-cover" data-alt="abstract digital visualization of rising data bars and glowing network nodes in a deep blue and cyan space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChXR8yxnUzzy5yqLl1D8JpKPBrrSoikqaCpUbzWIAcJN6p8o7abdsBu7cYlXnt-kYVxqydsl_88gBfu08zFEfVChfop1tcuwc4K_eDIpoStmPqzl-uOmeRMVM5tItD7_zYydc1vR-apgqu05FFRE1YEiFSsTvuLap-y_LGYFefnLJkGlBoKM9ZcWlabrCXh7DVOB2vG5eKxuaRKyuemrR7Z-ygY9n8Z5fWDCvW1WPyiQJKe4zyV4Zf26wYECHZZsa8IojYY-dPypxk"/>
+<div class="absolute inset-0 bg-gradient-to-r from-on-surface/80 to-transparent flex items-center px-12">
+<div class="glass-metric p-8 rounded-2xl max-w-xs border border-white/20">
+<p class="text-[10px] font-black uppercase tracking-widest text-primary mb-2">Alcance Estimado Total</p>
+<p class="text-4xl font-black text-on-surface tracking-tighter">1.4M+</p>
+<p class="text-xs text-on-surface-variant mt-2">Pessoas únicas impactadas dentro do seu segmento.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>
